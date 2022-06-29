@@ -13,8 +13,8 @@ let
 
   vim = vimOptions.config.vim;
 in pkgs.wrapNeovim myNeovimUnwrapped {
-  # viAlias = vim.viAlias;
-  # vimAlias = vim.vimAlias;
+  viAlias = vim.viAlias;
+  vimAlias = vim.vimAlias;
   configure = {
     # customRC = builtins.trace vim.configRC vim.configRC;
     customRC =
