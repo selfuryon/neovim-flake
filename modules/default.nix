@@ -52,6 +52,8 @@ in {
       vim.cmd ('filetype plugin indent on')
 
       -- Global variables
+      vim.g.mapleader = ' '
+      vim.g.maplocalleader = ' '
       vim.g.t_Co = 256
       vim.o.updatetime = 100
 
