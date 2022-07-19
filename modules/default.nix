@@ -1,7 +1,9 @@
 { config, lib, pkgs, ... }:
 with lib;
 with builtins;
-let cfg = config.vim;
+let
+  cfg = config.vim;
+  parsers = pkgs.tree-sitter.withPlugins (_: pkgs.tree-sitter.allGrammars);
 in {
   imports = [ ./core ];
   options.vim = {
@@ -437,6 +439,9 @@ in {
 
       -- lualine configuration
       require('lualine').setup{options = {theme = 'auto'}}
+
+      -- treesitter
+      vim.opt.runtimepath:append("${parsers}")
 
     '';
   };
