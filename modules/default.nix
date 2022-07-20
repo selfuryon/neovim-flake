@@ -442,6 +442,10 @@ in {
 
       -- treesitter
       vim.opt.runtimepath:append("${parsers}")
+      local status, ts_install = pcall(require, "nvim-treesitter.install")
+      if(status) then
+        ts_install.compilers = { "${pkgs.gcc}/bin/gcc" }
+      end
 
     '';
   };
