@@ -3,7 +3,7 @@
 let
   neovimPlugins = pkgs.neovimPlugins;
   myNeovimUnwrapped = pkgs.neovim-unwrapped.overrideAttrs
-    (prev: { propagatedBuildInputs = with pkgs; [ pkgs.stdenv.cc.cc.lib ]; });
+    (prev: { propagatedBuildInputs = with pkgs; [ pkgs.stdenv.cc.cc.lib lua.pkgs.libluv ]; });
 
   vimOptions = lib.evalModules {
     modules = [ { imports = [ ../modules ]; } config ];

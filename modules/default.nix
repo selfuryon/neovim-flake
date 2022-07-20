@@ -3,7 +3,7 @@ with lib;
 with builtins;
 let
   cfg = config.vim;
-  parsers = pkgs.tree-sitter.withPlugins (_: pkgs.tree-sitter.allGrammars);
+  treesitterGrammars = pkgs.tree-sitter.withPlugins (_: pkgs.tree-sitter.allGrammars);
 in {
   imports = [ ./core ];
   options.vim = {
@@ -36,7 +36,7 @@ in {
       nvim-cmp
       formatter
       nvim-lint
-      nvim-treesitter
+      #nvim-treesitter
       nvim-treesitter-textobjects
       nvim-snippy
       neogit
@@ -47,6 +47,7 @@ in {
       vim-commentary
       hop
       surround
+      (pkgs.vimPlugins.nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
     ];
 
     vim.luaConfigRC = mkIf cfg.enable ''
@@ -439,14 +440,6 @@ in {
 
       -- lualine configuration
       require('lualine').setup{options = {theme = 'auto'}}
-
-      -- treesitter
-      vim.opt.runtimepath:append("${parsers}")
-      local status, ts_install = pcall(require, "nvim-treesitter.install")
-      if(status) then
-        ts_install.compilers = { "${pkgs.gcc}/bin/gcc" }
-      end
-
     '';
   };
 }
